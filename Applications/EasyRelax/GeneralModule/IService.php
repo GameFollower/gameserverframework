@@ -19,7 +19,6 @@ class IService extends Singleton{
 	public function SetClientIDTokenPlayerID($client_id,$token,$player_id)
 	{
 		$this->player_id_to_token_id[$player_id] = $token;
-		
 		$this->player_id_to_client_id[$player_id] = $client_id;
 		$this->client_id_to_player_id[$client_id] = $player_id;
 	}

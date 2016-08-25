@@ -51,7 +51,7 @@ class LoginLogic{
 			}
 			$response_message = json_encode($response_message);
 
-                        IService::getInstance()->SetClientIDTokenPlayerID($client_id,$token,$player_id);
+            IService::getInstance()->SetClientIDTokenPlayerID($client_id,$token,$player_id);
 			IService::getInstance()->ResponseMsg($player_id,$response_message);
 		}
 	}

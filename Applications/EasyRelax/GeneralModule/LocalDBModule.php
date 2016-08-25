@@ -2,44 +2,29 @@
 namespace GeneralModule;
 
 use \GeneralModule\Singleton;
+use \LocalDataMgr\techModule\techMgr;
 
 class LocalDBModule extends Singleton
 {
+	private $_techmgr = null;
 	public static function getInstance($class_name = __CLASS__){
 		return parent::getInstance($class_name);
 	}
 	
-    public function parseXMLConfig($param) 
-    {
-//         $reader = new XMLReader();   
-//         $reader->open($param);   
-//         $countElements = 0;   
-          
-//         while ($reader->read())
-//         {   
-//                 if($reader->nodeType == XMLReader::ELEMENT){   
-//                     $nodeName = $reader->name;   
-//                 }   
-//                 if($reader->nodeType == XMLReader::TEXT && !empty($nodeName)){   
-//                     switch($nodeName){   
-//                         case 'name':   
-//                             $name = $reader->value;   
-//                             break;   
-//                         case 'channel':   
-//                             $channel = $reader->value;   
-//                             break;   
-//                         case 'start':   
-//                             $start = $reader->value;   
-//                             break;   
-//                         case 'duration':   
-//                             $duration = $reader->value;   
-//                             break;   
-//                     }   
-//                     echo $reader->value; 
-//                 }   
-//          }   
-//         $reader->close();   
-    }
+	public function __destruct(){
+		echo "LocalDBModule __destruct\n";
+	}
+	
+	public function Initialize(){
+		//初始化全局单例模块  各个模块excel reader
+		echo "LocalDBModule Initialize\n";
+		$this->_techmgr = new techMgr();
+	}
+	
+	public function Unitialize(){
+		echo "LocalDBModule Unitialize\n";
+	}
+	
 }
 
 

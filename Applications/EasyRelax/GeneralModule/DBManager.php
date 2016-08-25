@@ -3,8 +3,9 @@
 namespace GeneralModule;
 
 use \GeneralModule\Singleton;
-use redis;
+// use redis;
 require_once 'database.class.php';
+require_once 'RedisCluster.php';
 
 class DBManager extends Singleton{
 	
@@ -39,8 +40,6 @@ class DBManager extends Singleton{
 	private static $redis_db_config = array(
 			'host'    => '127.0.0.1',
 			'port'    => 6379,
-			'user'    => 'root',
-			'password' => '123',
 	);
 	
 	public function __construct(){
@@ -60,9 +59,10 @@ class DBManager extends Singleton{
 			self::$_game_db = new Database(self::$game_db_config['host'], self::$game_db_config['user'],
 					self::$game_db_config['password'], self::$game_db_config['dbname']);
 	                
-	                self::$_redis_db = new redis();
-	                $result = self::$_redis_db->connect(self::$redis_db_config['host'], self::$redis_db_config['port']);  
-                        //var_dump($result); //结果：bool(true)  
+// 	        self::$_redis_db = new redis();
+// 	        $result = self::$_redis_db->connect(self::$redis_db_config['host'], self::$redis_db_config['port']);
+			self::$_redis_db = new RedisCluster();
+			self::$_redis_db->connect(self::$redis_db_config, false);
 		}
 	}
 	
@@ -73,7 +73,7 @@ class DBManager extends Singleton{
 		return self::$_game_db;
 	}
 	public static function getRedisDB(){
-	        return self::$_redis_db;
+	    return self::$_redis_db;
 	}
 }
 
